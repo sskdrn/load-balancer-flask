@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+  <title>Select Section</title>
+  <style>
+    #title {
+      text-align: center;
+      background-color: #313d83;
+      color: #FFF;
+    }
+
+    .error-msg {
+      font-weight: 600;
+    }
+    .field{
+      font-weight: 700;
+    }
+    th,td{
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 id="title">Select Section</h1>
+  <div class="container">
+    {% if error=='unavailable': %}
+    <p class="error-msg text-danger">The selected section is Unavailable. Try again.</p>
+    {% endif %}
+    <table class=" table table-info student-info">
+      <tbody>
+        <tr>
+          <td><span class="field">Name: </span></td>
+          <td>{{student_details['Name']}}</td>
+        </tr>
+        <tr>
+          <td><span class="field">Register Number: </span></td>
+          <td>{{student_details['RegisterNumber']}}</td>
+        </tr>
+        <tr>
+          <td><span class="field">Branch: </span></td>
+          <td>{{student_details['Branch']}}</td>
+        </tr>
+        <tr>
+          <td><span class="field">Semester: </span></td>
+          <td>{{student_details['Semester']}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-hover table-bordered">
+      <thead class="table-dark">
+        <tr>
+          <th>Section</th>
+          <th>Maximum Seats</th>
+          <th>Available Seats</th>
+          <th>Select Section</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for section in section_details:%}
+        <tr class="{{ 'table-danger' if section[ 'MaxIntake' ] <=section[ 'CurrentIntake' ] else 'table-success' }}">
+          <td>{{section['Section']}}</td>
+          <td>{{section['MaxIntake']}}</td>
+          <td class="avail-count">{{section['MaxIntake']-section['CurrentIntake']}}</td>
+          <td>
+            <form action="{{ url_for('confirm_select') }}" method="POST">
+              <input type="text" name="regno" id="regno" value="{{ student_details['RegisterNumber'] }}"
+                style="display:none;">
+              <input type="text" name="section" id="section" value="{{ section['Section'] }}" style="display:none;">
+              <input type="submit"
+                class="btn  {{ 'btn-danger' if section[ 'MaxIntake' ] <= section[ 'CurrentIntake' ] else 'btn-success' }}"
+                value="Register" {{ 'disabled' if section[ 'MaxIntake' ] <=section[ 'CurrentIntake' ] else '' }}>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+<!--<p>Name: {{student_details['Name']}}</p>
+    <p>Register Number: {{student_details['RegisterNumber']}} </p> -->
+
+</html>

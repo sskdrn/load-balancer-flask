@@ -1,0 +1,50 @@
+version: '3'
+services:
+
+  loadbalancer:
+    image: load-balancer
+    ports:
+      - "8000:8000"
+    networks:
+      cbcs:
+        ipv4_address: 172.16.238.10
+
+  server1:
+    image: server-test
+    environment:
+      - APP=server-1
+    ports:
+      - "7000:7000"
+    networks:
+      cbcs:
+        ipv4_address: 172.16.238.11
+
+
+  server2:
+    image: server-test
+    environment:
+      - APP=server-2
+    ports:
+      - "7001:7000"
+    networks:
+      cbcs:
+        ipv4_address: 172.16.238.12
+
+  server3:
+    image: server-test
+    environment:
+      - APP=server-3
+    ports:
+      - "7002:7000"
+    networks:
+      cbcs:
+        ipv4_address: 172.16.238.13
+
+networks:
+  cbcs:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1

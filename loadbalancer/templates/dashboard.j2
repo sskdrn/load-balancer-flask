@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Quicksand&display=swap"
+    rel="stylesheet">
+  <title>L7 Load balancer</title>
+  <style>
+    body {
+      background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    }
+
+    h1,
+    h2 {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.63);
+      padding-top: 2%;
+      padding-bottom: 2%;
+      padding-left: 2%;
+      padding-right: 2%;
+      border: 2px solid black;
+      border-radius: 1%;
+    }
+
+    table {
+      font-family: 'Quicksand', sans-serif;
+      padding: 5%;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>L7 Load Balancer</h1>
+  <h1 id="title" style="margin-bottom:0%;">Simulation of Choice Based Credit System</h1>
+  <h2 id="title" style="margin: 0%;">Sakthidharan S - 12003220 - Year III, CSE</h1>
+    <div class="container">
+      <div class="system-info">
+        <h2>System Information</h2>
+        <table class="table table-bordered table-primary table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col" class="table-dark">Propeties</th>
+              <th scope="col">Server 1</th>
+              <th scope="col">Server 2</th>
+              <th scope="col">Server 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="table-dark">CPU Usage</th>
+              <td id="cpu_1">{{server1_info['cpu_usage']}} %</td>
+              <td id="cpu_2">{{server2_info['cpu_usage']}} %</td>
+              <td id="cpu_3">{{server3_info['cpu_usage']}} %</td>
+            </tr>
+            <tr>
+              <th scope="row" class="table-dark">RAM Usage</th>
+              <td id="mem_1">{{server1_info['memory_usage']}} %</td>
+              <td id="mem_2">{{server2_info['memory_usage']}} %</td>
+              <td id="mem_3">{{server3_info['memory_usage']}} %</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 1%; margin-bottom: 1%;" class="buttons d-flex justify-content-center align-items-center">
+        <h4 style="margin-right: 2%;">Select Algorithm: </h4>
+        <button type="button" id="hash-button"
+          class="btn {{'btn-primary' if algorithm_used=='port_hashing' else 'btn-outline-primary'}}"
+          style="margin-right: 2%;" {{'disabled' if algorithm_used=='port_hashing' else '' }}>Port
+          Hashing</button>
+        <button type="button" id="rr-button"
+          class="btn {{'btn-primary' if algorithm_used=='round_robin' else 'btn-outline-primary'}}" {{'disabled' if
+          algorithm_used=='round_robin' else '' }}>Least CPU Usage</button>
+      </div>
+      <div class="requests-info">
+        <h2>Requests</h2>
+        <table class="table table-bordered table-secondary table-striped">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Client IP address</th>
+              <th scope="col">Client port</th>
+              <th scope="col">Handling Server</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in entries: %}
+            <tr>
+              <td>{{entry['request']}}</td>
+              <td>{{entry['host']}}</td>
+              <td>{{entry['client_port']}}</td>
+              <td>{{entry['server']}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p id="algorithm-used" style="display: none;">{{algorithm_used}}</p>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+      let algorithmUsed = document.getElementById("algorithm-used").innerText;
+      let ipHashButton = document.getElementById("hash-button");
+      let rrButton = document.getElementById("rr-button");
+      let cpu_info = [document.getElementById("cpu_1"), document.getElementById("cpu_2"), document.getElementById("cpu_3")]
+      let mem_info = [document.getElementById("mem_1"), document.getElementById("mem_2"), document.getElementById("mem_3")]
+      let updateSystemStats = () => {
+        axios.get('/getsystemstats')
+          .then(response => {
+            let info = response.data;
+            for (let i = 0; i < 3; i++) {
+              cpu_info[i].innerText = info[`server${i + 1}_info`]['cpu_usage']+' %'
+              mem_info[i].innerText = info[`server${i + 1}_info`]['memory_usage']+' %'
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+      let changeAlgorithm = () => {
+        axios.post('/changemode')
+          .then(response => {
+            if (response.data["SwitchSuccess"] && response.status == 200) {
+              if (response.data["AlgorithmInUse"] == "PortHashing") {
+                $("#hash-button").addClass("btn-primary");
+                $("#rr-button").removeClass("btn-primary");
+                $("#hash-button").prop("disabled", true);
+                $("#rr-button").prop("disabled", false);
+                $("#rr-button").addClass("btn-outline-primary");
+                $("#hash-button").removeClass("btn-outline-primary");
+              }
+              else {
+                $("#rr-button").addClass("btn-primary");
+                $("#hash-button").removeClass("btn-primary");
+                $("#rr-button").prop("disabled", true);
+                $("#hash-button").prop("disabled", false);
+                $("#hash-button").addClass("btn-outline-primary");
+                $("#rr-button").removeClass("btn-outline-primary");
+              }
+            }
+          }, error => {
+            alert("Error has occured.");
+          })
+          .catch(function (error) {
+            alert(error);
+          });
+      }
+      ipHashButton.addEventListener("click", changeAlgorithm);
+      rrButton.addEventListener("click", changeAlgorithm);
+      setInterval(updateSystemStats,1000);
+    </script>
+
+</body>
+
+</html>

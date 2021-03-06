@@ -1,0 +1,160 @@
+{
+    "StudentsData": [
+        {
+            "Name": "Aakash M",
+            "RegisterNumber": 122003001,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Balagowri N",
+            "RegisterNumber": 122003002,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Chandrasekhar B",
+            "RegisterNumber": 122003003,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Dafinny J",
+            "RegisterNumber": 122003004,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Ebinezer P",
+            "RegisterNumber": 122003005,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Farhana Fathima S A",
+            "RegisterNumber": 122003006,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Gajendran D",
+            "RegisterNumber": 122003007,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Hruthika S J",
+            "RegisterNumber": 122003008,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Indiradattan S",
+            "RegisterNumber": 122003009,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Jadhagam Jyotsna J",
+            "RegisterNumber": 122003010,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Keerthivasan K",
+            "RegisterNumber": 122003011,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Lavanya M",
+            "RegisterNumber": 122003012,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Mahesh J",
+            "RegisterNumber": 122003013,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Neha Nihanth",
+            "RegisterNumber": 122003014,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Oats Oster",
+            "RegisterNumber": 122003015,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Pickpocket Parivendhan",
+            "RegisterNumber": 122003016,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Qaeda Quebec",
+            "RegisterNumber": 122003017,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Rowdy Rangamma",
+            "RegisterNumber": 122003018,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Sakthidharan S",
+            "RegisterNumber": 122003019,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Thandiri Mundhiri T",
+            "RegisterNumber": 122003020,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Urvambu Urmila",
+            "RegisterNumber": 122003021,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Veenvombu Vijay",
+            "RegisterNumber": 122003022,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Walter Vetrivel",
+            "RegisterNumber": 122003023,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Xylphone Xenitha",
+            "RegisterNumber": 122003024,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Yerichal Yaashika",
+            "RegisterNumber": 122003025,
+            "Branch": "CSE",
+            "Semester": "VI"
+        },
+        {
+            "Name": "Zoom Zeba",
+            "RegisterNumber": 122003026,
+            "Branch": "CSE",
+            "Semester": "VI"
+        }
+    ]
+}

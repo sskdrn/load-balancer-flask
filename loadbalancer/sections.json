@@ -1,0 +1,29 @@
+{
+    "Sections":[
+        {
+            "Section":"6-CSE-A",
+            "MaxIntake":6,
+            "CurrentIntake":0
+        },
+        {
+            "Section":"6-CSE-B",
+            "MaxIntake":5,
+            "CurrentIntake":0
+        },
+        {
+            "Section":"6-CSE-C",
+            "MaxIntake":5,
+            "CurrentIntake":0
+        },
+        {
+            "Section":"6-CSE-D",
+            "MaxIntake":5,
+            "CurrentIntake":0
+        },
+        {
+            "Section":"6-CSE-E",
+            "MaxIntake":5,
+            "CurrentIntake":0
+        }
+    ]
+}

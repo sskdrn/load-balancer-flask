@@ -22,7 +22,7 @@ def connect_to_database():
         global students_info
         global students_registration
         global sections
-        db_client = MongoClient("mongodb+srv://sskdrn:sakthi19@cbcs.iiwws.mongodb.net/info?retryWrites=true&w=majority")
+        db_client = MongoClient("mongodb+srv://<username>:<password>@<db>.iiwws.mongodb.net/info?retryWrites=true&w=majority")
         # db_client = MongoClient('172.16.238.14',27107)
         db_connected = True
         db_cbcs = db_client.cbcs
